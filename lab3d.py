@@ -1,32 +1,29 @@
 #!/usr/bin/env python3
-# Author ID: kbay@myseneca.ca
 
+# Author ID: kbay@myseneca.ca
 
 import subprocess
 
 def free_space():
-    #Launch the Linux commande pipeline
+    
+    #Launch the Linux command pipeline
     process = subprocess.Popen(
-        "df -h |grep '/$' |awk '{print $4}'",
+        "df -h | grep '/$' |awk '{print $4}'",
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         shell=True,
         text=True
-
     )
+        
+        #Capture output and errors
+    output, error = process.communicate()
 
-
-# Capture output and errors
-    output = process.communicate()
-
-# Return cleaned output
-    return  output.strip() 
+    # Return cleaned output
+    return output.strip()
 
 if __name__ == "__main__":
-    #print(free_space())
+    print(free_space())
 
-    import lab3d
 
+import lab3d
 lab3d.free_space()
-
-# Will return 9.6G 
